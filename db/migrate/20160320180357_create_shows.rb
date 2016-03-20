@@ -9,5 +9,6 @@ class CreateShows < ActiveRecord::Migration
       t.string  :tkts_url
       t.text    :description
       t.timestamps
+    end
   end
 end
