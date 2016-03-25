@@ -6,7 +6,7 @@ class Act < ActiveRecord::Base
     self.name.strip.downcase.gsub(' ','-')
   end
   
-  def find_by_slug(arg)
+  def self.find_by_slug(arg)
     self.all.find{|inst| inst.slug == arg}
   end
 end

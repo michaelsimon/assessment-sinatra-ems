@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-8"><h1>Edit Venue</h1></div>
+</div>
+
+<form method="post" action="/venues/<%= @venue.id %>" class="form-horizontal">
+<div class="form-group">
+    <label for="inputName" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="name" id="inputName" value="<%= @venue.name %>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress" class="col-sm-2 control-label">Address</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="address" id="inputAddress"  value="<%= @venue.address %>">    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputZipcode" class="col-sm-2 control-label">Zipcode</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="zipcode" id="inputZipcode"  value="<%= @venue.zipcode %>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+    <div class="col-sm-8">
+      <input type="tel" class="form-control" name="phone" id="inputPhone"  value="<%= @venue.phone %>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail" class="col-sm-2 control-label">E-mail</label>
+    <div class="col-sm-8">
+      <input type="email" class="form-control" name="email" id="inputEmail"  value="<%= @venue.email %>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputWebsite" class="col-sm-2 control-label">Website</label>
+    <div class="col-sm-8">
+      <input type="url" class="form-control" name="website" id="inputWebsite"  value="<%= @venue.website %>">
+    </div>
+  </div>
+  <div class="col-sm-offset-2 col-sm-6">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>

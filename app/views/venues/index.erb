@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-8"><h1>All Venues</h1></div>
+</div>
+
+<div class="row">
+<div class="col-sm-offset-1 col-sm-11">
+<table class="table table-hover">
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Address</th>
+  <th>Zipcode</th>
+  <th>Phone</th>
+  <th>E-Mail</th>
+  <th>Website</th>
+  <th>&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<% @venues.each do |venue| %>
+<tr><td><%= venue.name %></td><td><%= venue.address %></td><td><%= venue.zipcode %></td>
+<td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>/edit">Edit</a> | <a href="/acts/<%= venue.id %>/delete">Delete</a></tr>
+<% end %>
+</tbody>
+</table>
+</div></div>
