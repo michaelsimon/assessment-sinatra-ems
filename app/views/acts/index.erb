@@ -3,21 +3,24 @@
 </div>
 <div class="panel panel-default col-sm-offset-1 col-sm-10">
   <table class="table">
-<thead>
-<tr>
-  <th>Name</th>
-  <th>Description</th>
-  <th>Size</th>
-  <th>Location</th>
-  <th>Website</th>
-  <th>&nbsp;</th>
-</tr>
-</thead>
-<tbody>
-<% @acts.each do |act| %>
-<tr><td><%= act.name %></td><td><%= act.description %></td><td><%= act.size %></td>
-<td><%= act.location %></td><td><%= act.website %></td><td><a href="/acts/<%= act.slug %>">View</a> | <a href="/acts/<%= act.slug %>/edit">Edit</a> | <a href="/acts/<%= act.slug %>/delete">Delete</a></td></tr>
-<% end %>
-</tbody>
-</table>
-</div>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Size</th>
+        <th>Location</th>
+        <th>Website</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @acts.each do |act| %>
+      <tr><td><%= act.name %></td><td><%= act.description %></td><td><%= act.size %></td>
+        <td><%= act.location %></td><td><%= act.website %></td><td><a href="/acts/<%= act.slug %>">View</a> | <a href="/acts/<%= act.slug %>/edit">Edit</a> | <a href="/acts/<%= act.slug %>/delete">Delete</a></td></tr>
+        <% end %>
+        <% if @acts.empty? %>
+        <tr><td colspan="5">No data to list</td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

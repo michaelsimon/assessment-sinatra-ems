@@ -4,22 +4,25 @@
 
 <div class="panel panel-default col-sm-offset-1 col-sm-10">
   <table class="table">
-<thead>
-<tr>
-  <th>Name</th>
-  <th>Address</th>
-  <th>Zipcode</th>
-  <th>Phone</th>
-  <th>E-Mail</th>
-  <th>Website</th>
-  <th>&nbsp;</th>
-</tr>
-</thead>
-<tbody>
-<% @venues.each do |venue| %>
-<tr><td><%= venue.name %></td><td><%= venue.address %></td><td><%= venue.zipcode %></td>
-<td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>">View</a> | <a href="/venues/<%= venue.id %>/edit">Edit</a> | <a href="/venues/<%= venue.id %>/delete">Delete</a></td></tr>
-<% end %>
-</tbody>
-</table>
-</div>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Zipcode</th>
+        <th>Phone</th>
+        <th>E-Mail</th>
+        <th>Website</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @venues.each do |venue| %>
+      <tr><td><%= venue.name %></td><td><%= venue.address %></td><td><%= venue.zipcode %></td>
+        <td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>">View</a> | <a href="/venues/<%= venue.id %>/edit">Edit</a> | <a href="/venues/<%= venue.id %>/delete">Delete</a></td></tr>
+        <% end %>
+        <% if @venues.empty? %>
+        <tr><td colspan="5">No data to list</td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
