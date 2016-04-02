@@ -78,13 +78,13 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi <%= session[:username] %><span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="/users/edit">Edit Profile</a></li>
-                    <li><a href="/users/logout">Logout</a></li>
+                    <li><a href="/sessions/logout">Logout</a></li>
                   </ul>
                 </li>
               </ul>  
               <% else %>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="/users/login">Login</a></li>
+                <li class="<%= 'active' if @path.include?("sessions") %>"><a href="/sessions/login" >Login</a></li>
               </ul>
               <% end %>
             </div><!-- /.navbar-collapse -->

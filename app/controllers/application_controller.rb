@@ -28,7 +28,7 @@ def self.auth user_id
     condition do
       if !logged_in?
         flash[:error] = "Please login to perform this action." 
-        redirect to '/users/login' 
+        redirect to '/sessions/login' 
       end
     end
   end

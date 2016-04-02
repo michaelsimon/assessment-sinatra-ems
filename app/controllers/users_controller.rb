@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
 
-  get '/users/login/?' do
-    erb :"users/login"
-  end
-
   get '/users/new/?' do
     if !logged_in?
       erb :"users/new"
@@ -33,18 +29,7 @@ class UsersController < ApplicationController
       redirect to '/users/new'
     end
   end
-
-  post '/users/login' do
-    user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      session[:username] = user.name 
-      redirect to '/'
-    else
-      flash[:error] = "Invalid username or password, please try again." 
-      redirect to '/users/login'
-    end
-  end
+  
 
   post '/users/edit' do 
     user = User.find(session[:user_id])
@@ -61,9 +46,4 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/logout', :auth => :user_id do
-    session.clear
-    flash[:success] = "You are now logged out." 
-    redirect to '/'
-  end
 end
