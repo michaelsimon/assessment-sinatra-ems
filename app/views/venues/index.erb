@@ -2,9 +2,8 @@
   <div class="col-sm-offset-1 col-sm-8"><h1>All Venues</h1></div>
 </div>
 
-<div class="row">
-<div class="col-sm-offset-1 col-sm-11">
-<table class="table table-hover">
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+  <table class="table">
 <thead>
 <tr>
   <th>Name</th>
@@ -19,8 +18,8 @@
 <tbody>
 <% @venues.each do |venue| %>
 <tr><td><%= venue.name %></td><td><%= venue.address %></td><td><%= venue.zipcode %></td>
-<td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>/edit">Edit</a> | <a href="/acts/<%= venue.id %>/delete">Delete</a></tr>
+<td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>">View</a> | <a href="/venues/<%= venue.id %>/edit">Edit</a> | <a href="/venues/<%= venue.id %>/delete">Delete</a></td></tr>
 <% end %>
 </tbody>
 </table>
-</div></div>
+</div>

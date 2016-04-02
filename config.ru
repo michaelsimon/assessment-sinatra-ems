@@ -1,6 +1,6 @@
 require './config/environment'
 
-use Rack::Static, :urls => ['/css','/fonts','/js','/images'], :root => 'public' # Rack fix allows seeing the css folder.
+use Rack::Static, :urls => ['/css','/fonts','/js','/images'], :root => 'public' # Rack fix allows seeing the static folders.
 
 use Rack::MethodOverride
 use ActsController

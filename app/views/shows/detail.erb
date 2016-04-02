@@ -1,1 +1,10 @@
-<h1>Show Detail</h1>
+<p>&nbsp;</p>
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+<h1><%= @show.name %></h1>
+
+<p><strong>Date: </strong><%= @show.fmatdate %> | <strong>Time: </strong><%= @show.fmattime %></p>
+<p><strong>Act: </strong><%= @show.act.name  %>  <a href="/acts/<%= @show.act.slug %>"><i class="fa fa-arrow-circle-right"></i></a></p>
+<p><strong>Venue: </strong><%= @show.venue.name  %>  <a href="/venues/<%= @show.venue.id %>"><i class="fa fa-arrow-circle-right"></i></a></p>
+<p><strong>Description: </strong><%= @show.description  %></p>
+<p><strong>Ticketing: </strong><a href="<%= @show.tkts_url  %>" target="_blank"><%= @show.tkts_url %></a></p>
+</div>

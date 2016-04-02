@@ -1,48 +1,68 @@
 class VenuesController < ApplicationController
 
-  get '/venues/?' do
+  get '/venues/?', :auth => :user_id do
     @venues = Venue.all
     erb :"venues/index"
   end
 
-  get '/venues/new/?' do
+  get '/venues/new/?', :auth => :user_id do
     erb :"venues/new"
   end
 
-  get '/venues/:id/?' do
+  get '/venues/:id/?', :auth => :user_id do
     @venue = Venue.find(params[:id])
-    erb :"venues/detail"
+    if @venue
+      erb :"venues/detail"
+    else
+      flash[:error] = "Venue not found." 
+      redirect to '/venues'
+    end
   end
 
-  get '/venues/:id/edit/?' do
+  get '/venues/:id/edit/?', :auth => :id do
     @venue = Venue.find(params[:id])
-    erb :"venues/edit"
+    if @venue
+      erb :"venues/edit"
+    else
+      flash[:error] = "Venue not found." 
+      redirect to '/venues'
+    end
   end
-  
 
-  delete '/venues/:id/delete/?' do
+  get '/venues/:id/delete/?', :auth => :user_id do
     @venue = Venue.find(params[:id])
-    @venue.delete if @venue
+    if @venue
+      @venue.delete
+      flash[:success] = "Venue deleted." 
+    else
+      flash[:error] = "Venue not found." 
+    end
     redirect to '/venues'
   end
 
-  post '/venues' do 
+  post '/venues', :auth => :user_id do 
     @venue = Venue.create(params)
-    if @venue
-        redirect to '/venues'
-      else
-        redirect to '/venues/new'
-      end
+    if @venue.valid?
+      redirect to "/venues/#{@venue.id}"
+    else
+      flash[:error] = "Unable to create venue, please try again, ensuring all fields are filled out." 
+      redirect to '/venues/new'
     end
+  end
 
-  post '/venues/:id/?' do
-    @venue = Venue.create(params)
+  post '/venues/:id/?', :auth => :user_id do
+    @venue = Venue.find(params[:id])
     if @venue
-      @venue.update(name: params[:name], address: params[:address], zipcode: params[:zipcode], phone: params[:phone], email: params[:email], website: params[:website])
-        redirect to '/venues'
+      if @venue.update(params.except!("splat","captures")).valid?
+        redirect to "/venues/#{@venue.id}"
       else
+        flash[:error] = "Unable to update venue, please try again." 
         redirect to "/venues/#{params[:id]/edit}"
       end
+    else
+      flash[:error] = "Venue not found." 
+      redirect to '/venues'
     end
-  
+  end
+
 end

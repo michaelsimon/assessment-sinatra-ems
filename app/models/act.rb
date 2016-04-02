@@ -1,4 +1,5 @@
 class Act < ActiveRecord::Base
+  validates_presence_of :name, :description, :size, :location, :website
 
   has_many :shows
 

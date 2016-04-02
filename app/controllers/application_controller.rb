@@ -20,14 +20,14 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= User.find(session[:id]) if session[:id]
+      session[:user_id]
     end
   end
 
 def self.auth user_id
     condition do
       if !logged_in?
-        flash[:notice] = "You must login to create a new show" 
+        flash[:error] = "Please login to perform this action." 
         redirect to '/users/login' 
       end
     end
