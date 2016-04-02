@@ -67,11 +67,11 @@ class ShowsController < ApplicationController
   post '/shows/:id', :auth => :user_id do
     @show = Show.find(params[:id])
     if @show
-      if @show.update(params.except!("splat","captures")).valid?
+      if @show.update(params.except("splat","captures")).valid?
         redirect to "/shows/#{@show.id}"
       else
         flash[:error] = "Unable to update show, please try again." 
-        redirect to "/shows/#{params[:id]/edit}"
+        redirect to "/shows/#{params[:id]}/edit"
       end
     else
       flash[:error] = "Show not found." 

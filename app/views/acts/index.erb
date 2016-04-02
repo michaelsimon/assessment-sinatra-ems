@@ -15,8 +15,8 @@
     </thead>
     <tbody>
       <% @acts.each do |act| %>
-      <tr><td><%= act.name %></td><td><%= act.description %></td><td><%= act.size %></td>
-        <td><%= act.location %></td><td><%= act.website %></td><td><a href="/acts/<%= act.slug %>">View</a> | <a href="/acts/<%= act.slug %>/edit">Edit</a> | <a href="/acts/<%= act.slug %>/delete">Delete</a></td></tr>
+      <tr><td class="col-md-2"><%= act.name %></td><td  class="col-md-3"><%= act.description %></td><td  class="col-md-1"><%= act.size %></td>
+        <td  class="col-md-2"><%= act.location %></td><td  class="col-md-2"><%= act.website %></td><td><a href="/acts/<%= act.slug %>"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;&nbsp;<a href="/acts/<%= act.slug %>/edit"><i class="fa fa-pencil-square"></i></a>&nbsp;&nbsp;&nbsp;<a href="/acts/<%= act.slug %>/delete"><i class="fa fa-trash"></i></a></td></tr>
         <% end %>
         <% if @acts.empty? %>
         <tr><td colspan="5">No data to list</td></tr>

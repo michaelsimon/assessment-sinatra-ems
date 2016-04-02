@@ -1,5 +1,6 @@
 <p>&nbsp;</p>
 <div class="panel panel-default col-sm-offset-1 col-sm-10">
+    <div style="float: right;"><a href="/venues/<%= @venue.id %>/edit"><i class="fa fa-pencil-square fa-lg"></i></a>&nbsp;&nbsp;&nbsp;<a href="/venues/<%= @venue.id %>/delete"><i class="fa fa-trash fa-lg"></i></a></div>
   <h1><%= @venue.name %></h1>
 
   <p><strong>Address: </strong><%= @venue.address %>, <%= @venue.zipcode %></p>

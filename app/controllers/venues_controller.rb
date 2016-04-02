@@ -42,7 +42,7 @@ class VenuesController < ApplicationController
 
   post '/venues', :auth => :user_id do 
     @venue = Venue.create(params)
-    if @venue.valid?
+    if @venue
       redirect to "/venues/#{@venue.id}"
     else
       flash[:error] = "Unable to create venue, please try again, ensuring all fields are filled out." 
@@ -50,14 +50,14 @@ class VenuesController < ApplicationController
     end
   end
 
-  post '/venues/:id/?', :auth => :user_id do
+  post '/venues/:id', :auth => :user_id do
     @venue = Venue.find(params[:id])
     if @venue
-      if @venue.update(params.except!("splat","captures")).valid?
+      if @venue.update(params.except("splat","captures"))
         redirect to "/venues/#{@venue.id}"
       else
         flash[:error] = "Unable to update venue, please try again." 
-        redirect to "/venues/#{params[:id]/edit}"
+        redirect to "/venues/#{params[:id]}/edit"
       end
     else
       flash[:error] = "Venue not found." 

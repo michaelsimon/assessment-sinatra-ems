@@ -8,7 +8,6 @@
       <tr>
         <th>Name</th>
         <th>Address</th>
-        <th>Zipcode</th>
         <th>Phone</th>
         <th>E-Mail</th>
         <th>Website</th>
@@ -17,8 +16,8 @@
     </thead>
     <tbody>
       <% @venues.each do |venue| %>
-      <tr><td><%= venue.name %></td><td><%= venue.address %></td><td><%= venue.zipcode %></td>
-        <td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>">View</a> | <a href="/venues/<%= venue.id %>/edit">Edit</a> | <a href="/venues/<%= venue.id %>/delete">Delete</a></td></tr>
+      <tr><td class="col-md-2"><%= venue.name %></td><td><%= venue.address %>, <%= venue.zipcode %></td>
+        <td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;&nbsp;<a href="/venues/<%= venue.id %>/edit"><i class="fa fa-pencil-square"></i></a>&nbsp;&nbsp;&nbsp;<a href="/venues/<%= venue.id %>/delete"><i class="fa fa-trash"></i></a></td></tr>
         <% end %>
         <% if @venues.empty? %>
         <tr><td colspan="5">No data to list</td></tr>
