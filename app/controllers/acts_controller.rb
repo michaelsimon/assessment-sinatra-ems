@@ -54,7 +54,7 @@ class ActsController < ApplicationController
     @act = Act.find_by_slug(params[:slug])
     if @act
       if @act.update(params.except("splat","captures","slug"))
-        redirect to "/acts/#{params[:slug]}"
+        redirect to "/acts/#{@act.slug}"
       else
         flash[:error] = "Unable to update act, please try again."
         redirect to "/acts/#{params[:slug]}/edit"

@@ -18,7 +18,7 @@
     <tbody>
       <% @shows.order(show_date: :asc).where('show_date >= ?', Date.today).each do |show| %>
       <tr>
-        <td><%= show.name %></td>
+        <td class="col-md-2"><%= show.name %></td>
         <td><%= show.act.name %>  <a href="/acts/<%= show.act.slug %>"><i class="fa fa-arrow-circle-right"></i></a></td>
         <td><%= show.venue.name %>  <a href="/venues/<%= show.venue.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
         <td><%= show.fmatdate %></td><td><%= show.fmattime %></td>
