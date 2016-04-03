@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     @user = User.create(params)
     if @user.valid?
       session[:user_id] = @user.id
+      session[:username] = @user.name 
       redirect to '/'
     else
       flash[:error] = "You must provide your name and a valid e-mail address and password to create an account." 
