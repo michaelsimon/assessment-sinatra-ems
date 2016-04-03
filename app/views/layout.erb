@@ -82,7 +82,10 @@
                   </ul>
                 </li>
               </ul>  
-              <% else %>
+              <% else %>         
+              <ul class="nav navbar-nav navbar-right">
+                <li class="<%= 'active' if @path.include?("users") %>"><a href="/users/new" >Register</a></li>
+              </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="<%= 'active' if @path.include?("sessions") %>"><a href="/sessions/login" >Login</a></li>
               </ul>
