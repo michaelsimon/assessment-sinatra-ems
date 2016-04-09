@@ -22,7 +22,12 @@ class ActsController < ApplicationController
   get '/acts/:slug/edit/?', :auth => :user_id do
     @act = Act.find_by_slug(params[:slug])
     if @act
-      erb :"acts/edit"
+      if @act.user_id == session[:user_id]
+        erb :"acts/edit"
+      else
+        flash[:error] = "You are unable to edit an act you did not create." 
+        redirect to '/acts'
+      end
     else
       flash[:error] = "Unable to find act, please try again."
       redirect to '/acts'
@@ -32,8 +37,13 @@ class ActsController < ApplicationController
   get '/acts/:slug/delete/?', :auth => :user_id do
     @act = Act.find_by_slug(params[:slug])
     if @act
-      @act.delete
-      flash[:success] = "Act deleted." 
+      if @act.user_id == session[:user_id]
+        @act.delete
+        flash[:success] = "Act deleted." 
+      else
+        flash[:error] = "You are unable to delete an act you did not create." 
+        redirect to '/acts'
+      end
     else
       flash[:error] = "Act not found." 
     end

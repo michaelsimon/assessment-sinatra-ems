@@ -22,7 +22,12 @@ class VenuesController < ApplicationController
   get '/venues/:id/edit/?', :auth => :id do
     @venue = Venue.find(params[:id])
     if @venue
-      erb :"venues/edit"
+      if @venue.user_id == session[:user_id]
+        erb :"venues/edit"
+      else
+        flash[:error] = "You are unable to edit a venue you did not create." 
+        redirect to '/venues'
+      end
     else
       flash[:error] = "Venue not found." 
       redirect to '/venues'
@@ -32,8 +37,13 @@ class VenuesController < ApplicationController
   get '/venues/:id/delete/?', :auth => :user_id do
     @venue = Venue.find(params[:id])
     if @venue
-      @venue.delete
-      flash[:success] = "Venue deleted." 
+      if @venue.user_id == session[:user_id]
+        @venue.delete
+        flash[:success] = "Venue deleted." 
+      else
+        flash[:error] = "You are unable to delete a venue you did not create." 
+        redirect to '/venues'
+      end
     else
       flash[:error] = "Venue not found." 
     end
