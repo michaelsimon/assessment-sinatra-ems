@@ -1,0 +1,1 @@
+Please visit http://www.binpress.com/license/view/l/993f3cab247ffc88c0932118bf5bf1dd for terms of license.
