@@ -2,6 +2,7 @@ class Act < ActiveRecord::Base
   validates_presence_of :name, :description, :size, :location, :website
 
   has_many :shows
+  belongs_to :user
 
   def slug
     self.name.strip.downcase.gsub(' ','-')
