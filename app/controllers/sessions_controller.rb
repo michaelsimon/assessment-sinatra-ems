@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   end
 
 
- get '/sessions/logout', :auth => :user_id do
+ get '/sessions/logout', :auth => true do
     session.clear
     flash[:success] = "You are now logged out." 
     redirect to '/'

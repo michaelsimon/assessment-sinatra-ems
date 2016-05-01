@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/edit/?', :auth => :user_id do
+  get '/users/edit/?', :auth => true do
     @user = User.find(session[:user_id])
     if @user
       erb :"users/edit"

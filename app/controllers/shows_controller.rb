@@ -1,17 +1,17 @@
 class ShowsController < ApplicationController
 
-  get '/shows/?', :auth => :user_id do
+  get '/shows/?', :auth => true do
     @shows = Show.all
     erb :"shows/index"
   end
 
-  get '/shows/new/?', :auth => :user_id do
+  get '/shows/new/?', :auth => true do
     @venues = Venue.all
     @acts = Act.all
     erb :"shows/new"
   end
 
-  get '/shows/:id/?', :auth => :user_id do
+  get '/shows/:id/?', :auth => true do
     @show = Show.find(params[:id])
     if @show
       erb :"shows/detail"
@@ -21,7 +21,7 @@ class ShowsController < ApplicationController
     end
   end
 
-  get '/shows/:id/edit/?', :auth => :user_id do
+  get '/shows/:id/edit/?', :auth => true do
     @show = Show.find(params[:id])
     if @show 
       if @show.user_id == session[:user_id]
@@ -38,7 +38,7 @@ class ShowsController < ApplicationController
     end
   end
 
-  get '/shows/:id/delete/?', :auth => :user_id do
+  get '/shows/:id/delete/?', :auth => true do
     @show = Show.find(params[:id])
     if @show 
       if @show.user_id == session[:user_id]
@@ -53,7 +53,7 @@ class ShowsController < ApplicationController
     redirect to '/shows'
   end
 
-  post '/shows', :auth => :user_id do
+  post '/shows', :auth => true do
     @show = Show.new(params)
     @show.user_id = params[:user_id]
     if @show.save
@@ -64,10 +64,10 @@ class ShowsController < ApplicationController
     end
   end
 
-  post '/shows/:id', :auth => :user_id do
+  post '/shows/:id', :auth => true do
     @show = Show.find(params[:id])
     if @show
-      if @show.update(params.except("splat","captures")).valid?
+      if @show.update(act_id: params[:act_id], venue_id: params[:venue_id], show_date: params[:show_date], tkts_url: params[:tkts_url], description: params[:description], name: params[:name])
         redirect to "/shows/#{@show.id}"
       else
         flash[:error] = "Unable to update show, please try again." 

@@ -1,15 +1,15 @@
 class ActsController < ApplicationController
 
-  get '/acts/?', :auth => :user_id do
+  get '/acts/?', :auth => true do
     @acts = Act.all
     erb :"acts/index"
   end
 
-  get '/acts/new/?', :auth => :user_id do
+  get '/acts/new/?', :auth => true do
     erb :"acts/new"
   end
 
-  get '/acts/:slug/?', :auth => :user_id do
+  get '/acts/:slug/?', :auth => true do
     @act = Act.find_by_slug(params[:slug])
     if @act
       erb :"acts/detail"
@@ -19,7 +19,7 @@ class ActsController < ApplicationController
     end
   end
 
-  get '/acts/:slug/edit/?', :auth => :user_id do
+  get '/acts/:slug/edit/?', :auth => true do
     @act = Act.find_by_slug(params[:slug])
     if @act
       if @act.user_id == session[:user_id]
@@ -34,7 +34,7 @@ class ActsController < ApplicationController
     end
   end
 
-  get '/acts/:slug/delete/?', :auth => :user_id do
+  get '/acts/:slug/delete/?', :auth => true do
     @act = Act.find_by_slug(params[:slug])
     if @act
       if @act.user_id == session[:user_id]
@@ -50,7 +50,7 @@ class ActsController < ApplicationController
     redirect to '/acts'
   end
 
-  post '/acts', :auth => :user_id do 
+  post '/acts', :auth => true do 
     @act = Act.create(params)
     if @act
       redirect to "/acts/#{@act.slug}"
@@ -60,10 +60,10 @@ class ActsController < ApplicationController
     end
   end
 
-  post '/acts/:slug', :auth => :user_id do
+  post '/acts/:slug', :auth => true do
     @act = Act.find_by_slug(params[:slug])
     if @act
-      if @act.update(params.except("splat","captures","slug"))
+      if @act.update(name: params[:name], description: params[:description], size: params[:size], location: params[:location], website: params[:website])
         redirect to "/acts/#{@act.slug}"
       else
         flash[:error] = "Unable to update act, please try again."

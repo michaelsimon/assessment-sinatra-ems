@@ -1,15 +1,15 @@
 class VenuesController < ApplicationController
 
-  get '/venues/?', :auth => :user_id do
+  get '/venues/?', :auth => true do
     @venues = Venue.all
     erb :"venues/index"
   end
 
-  get '/venues/new/?', :auth => :user_id do
+  get '/venues/new/?', :auth => true do
     erb :"venues/new"
   end
 
-  get '/venues/:id/?', :auth => :user_id do
+  get '/venues/:id/?', :auth => true do
     @venue = Venue.find(params[:id])
     if @venue
       erb :"venues/detail"
@@ -19,7 +19,7 @@ class VenuesController < ApplicationController
     end
   end
 
-  get '/venues/:id/edit/?', :auth => :id do
+  get '/venues/:id/edit/?', :auth => true do
     @venue = Venue.find(params[:id])
     if @venue
       if @venue.user_id == session[:user_id]
@@ -34,7 +34,7 @@ class VenuesController < ApplicationController
     end
   end
 
-  get '/venues/:id/delete/?', :auth => :user_id do
+  get '/venues/:id/delete/?', :auth => true do
     @venue = Venue.find(params[:id])
     if @venue
       if @venue.user_id == session[:user_id]
@@ -50,7 +50,7 @@ class VenuesController < ApplicationController
     redirect to '/venues'
   end
 
-  post '/venues', :auth => :user_id do 
+  post '/venues', :auth => true do 
     @venue = Venue.create(params)
     if @venue
       redirect to "/venues/#{@venue.id}"
@@ -60,10 +60,10 @@ class VenuesController < ApplicationController
     end
   end
 
-  post '/venues/:id', :auth => :user_id do
+  post '/venues/:id', :auth => true do
     @venue = Venue.find(params[:id])
     if @venue
-      if @venue.update(params.except("splat","captures"))
+      if @venue.update(name: params[:name], address: params[:address], zipcode: params[:zipcode], email: params[:email], website: params[:website])
         redirect to "/venues/#{@venue.id}"
       else
         flash[:error] = "Unable to update venue, please try again." 

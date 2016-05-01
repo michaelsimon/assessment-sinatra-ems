@@ -24,9 +24,9 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-def self.auth user_id
+set(:auth) do |boolean| 
     condition do
-      if !logged_in?
+      if !logged_in? && boolean == true
         flash[:error] = "Please login to perform this action." 
         redirect to '/sessions/login' 
       end
