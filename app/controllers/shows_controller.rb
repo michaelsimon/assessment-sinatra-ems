@@ -24,7 +24,7 @@ class ShowsController < ApplicationController
   get '/shows/:id/edit/?', :auth => true do
     @show = Show.find(params[:id])
     if @show 
-      if @show.user_id == session[:user_id]
+      if @show.user_id == current_user
         @venues = Venue.all
         @acts = Act.all
         erb :"shows/edit"
@@ -41,7 +41,7 @@ class ShowsController < ApplicationController
   get '/shows/:id/delete/?', :auth => true do
     @show = Show.find(params[:id])
     if @show 
-      if @show.user_id == session[:user_id]
+      if @show.user_id == current_user
         @show.delete
         flash[:success]="Show deleted."
       else
@@ -55,7 +55,7 @@ class ShowsController < ApplicationController
 
   post '/shows', :auth => true do
     @show = Show.new(params)
-    @show.user_id = params[:user_id]
+    @show.user_id = current_user
     if @show.save
       redirect to "/shows/#{@show.id}"
     else
@@ -67,7 +67,7 @@ class ShowsController < ApplicationController
   post '/shows/:id', :auth => true do
     @show = Show.find(params[:id])
     if @show
-      if @show.update(act_id: params[:act_id], venue_id: params[:venue_id], show_date: params[:show_date], tkts_url: params[:tkts_url], description: params[:description], name: params[:name])
+      if @show.update(act_id: params[:act_id], venue_id: params[:venue_id], show_date: params[:show_date], show_time: params[:show_time], tkts_url: params[:tkts_url], description: params[:description], name: params[:name])
         redirect to "/shows/#{@show.id}"
       else
         flash[:error] = "Unable to update show, please try again." 

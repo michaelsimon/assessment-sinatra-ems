@@ -22,7 +22,7 @@ class ActsController < ApplicationController
   get '/acts/:slug/edit/?', :auth => true do
     @act = Act.find_by_slug(params[:slug])
     if @act
-      if @act.user_id == session[:user_id]
+      if @act.user_id == current_user
         erb :"acts/edit"
       else
         flash[:error] = "You are unable to edit an act you did not create." 
@@ -37,7 +37,7 @@ class ActsController < ApplicationController
   get '/acts/:slug/delete/?', :auth => true do
     @act = Act.find_by_slug(params[:slug])
     if @act
-      if @act.user_id == session[:user_id]
+      if @act.user_id == current_user
         @act.delete
         flash[:success] = "Act deleted." 
       else
@@ -51,8 +51,9 @@ class ActsController < ApplicationController
   end
 
   post '/acts', :auth => true do 
-    @act = Act.create(params)
-    if @act
+    @act = Act.new(params)
+    @act.user_id = current_user
+    if @act.save
       redirect to "/acts/#{@act.slug}"
     else
       flash[:error] = "Unable to create act, please try again, ensuring all fields are filled out." 

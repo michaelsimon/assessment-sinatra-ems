@@ -27,7 +27,7 @@
         <select class="form-control" id="inputAct" name="act_id">
           <option disabled>Select an act</option>
           <% @acts.each do |act| %>
-          <option value="<%= act.id %>" <%= 'selected' if @show.act_id = act.id %>><%= act.name %>
+          <option value="<%= act.id %>" <%= 'selected' if @show.act_id == act.id %>><%= act.name %>
             <% end %>
           </select>
         </div>
@@ -38,7 +38,7 @@
           <select class="form-control" id="inputVenue" name="venue_id">
             <option disabled>Select a venue</option>
             <% @venues.each do |venue| %>
-            <option value="<%= venue.id %>" <%= 'selected' if @show.venue_id = venue.id %>><%= venue.name %>
+            <option value="<%= venue.id %>" <%= 'selected' if @show.venue_id == venue.id %>><%= venue.name %>
               <% end %>
             </select>
           </div>
